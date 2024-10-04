@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  vscode: # базовый образ
+    user: ${REMOTE_USER}
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: user
+      args:
+        USERNAME: ${REMOTE_USER}
+        USER_UID: ${REMOTE_UID}
+        USER_GID: ${REMOTE_GID}
+        PIPY_USER: ${PIPY_USER}
+        PIPY_PASSWORD: ${PIPY_PASSWORD}
+    volumes:
+      - /home/${REMOTE_USER}:/home/${REMOTE_USER}:rw
+      - /etc/hosts:/etc/hosts:ro
+      - /secrets:/secrets:ro
+      - /secrets/dev-pip-secret/pip.conf:/etc/pip.conf:ro
+    runtime: nvidia
+    command: ["tail", "-f", "/dev/null"]
+    restart: always

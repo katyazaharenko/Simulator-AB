@@ -1,0 +1,6 @@
+[core]
+    analytics = false
+    remote = s3remote
+['remote "s3remote"']
+    url = s3://obs-ds-demo/experiments/switch-generator
+    endpointurl = https://s3.selcdn.ru

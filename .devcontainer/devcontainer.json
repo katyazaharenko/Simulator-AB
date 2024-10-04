@@ -1,0 +1,33 @@
+{
+    "dockerComposeFile": "../docker-compose.yml",
+	"service": "vscode",
+	"runServices": ["vscode"],
+	"workspaceFolder": "/app",
+	"updateRemoteUserUID": false,
+	"initializeCommand": "/bin/bash ./update_env.sh",
+
+	// "mounts": [{ "source": "/data/common/s3", "target": "/app/data_ext", "type": "bind" }],
+
+    "shutdownAction": "none", // keep containers running after VS Code shuts down
+
+    "customizations": {
+		"vscode": {
+			"settings": {
+				"terminal.integrated.shell.linux": "/bin/bash",
+				"python.pythonPath": "/usr/local/bin/python",
+				"python.testing.pytestEnabled": true,
+				"python.linting.flake": true,
+				"flake8.args": ["--max-line-length=120"],
+				"python.terminal.launchArgs": ["-m", "IPython", "--no-autoindent"]
+			},
+			"extensions": [
+				"ms-python.python",
+				"ms-python.flake8",
+				"ms-toolsai.jupyter",
+				"donjayamanne.githistory",
+				"waderyan.gitblame",
+				"donjayamanne.git-extension-pack"
+			]
+		}
+	}
+}
